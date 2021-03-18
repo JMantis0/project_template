@@ -30,4 +30,28 @@ router.get("/test", (req, res) => {
   res.send(200);
 });
 
+router.put("/testCreate", (req, res) => {
+  console.log(
+    "███████████████████████████████████████████████████████████████████"
+  );
+  console.log(
+    "███████████████████████████████████████████████████████████████████"
+  );
+  console.log("PUT request from client: /api/testCreate");
+  const newTestData = models.TestData.build({ text: "TEST DATA" });
+  newTestData
+    .save()
+    .then(response => {
+      console.log("Saved a new entry to database");
+      res.sendStatus(201);
+    })
+    .catch(error => {
+      console.log(
+        "There was an error attempting to create a test DB entry: ",
+        error
+      );
+      res.status(400).send(error);
+    });
+});
+
 module.exports = router;
